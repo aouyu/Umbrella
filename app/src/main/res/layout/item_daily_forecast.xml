@@ -24,7 +24,7 @@
             android:id="@+id/img_cond"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/weather_03"
+            android:src="@drawable/icon_sunny"
             android:layout_centerInParent="true"/>
 
         <LinearLayout

@@ -22,6 +22,8 @@ import com.yolanda.nohttp.rest.RequestQueue;
 import com.yolanda.nohttp.rest.Response;
 import com.yolanda.nohttp.rest.StringRequest;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -65,6 +67,7 @@ public class AddActivity extends BaseSimpleActivity{
 
     @Override
     protected void initData() {
+//        EventBus.getDefault().register(this);
         edtCityName.addTextChangedListener(new TextWatcher() {
 
             @Override

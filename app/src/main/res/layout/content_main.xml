@@ -5,7 +5,7 @@
     android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/bg_sunny"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.aouyu.apps.weather.MainActivity"
     tools:showIn="@layout/activity_main">
