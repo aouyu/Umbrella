@@ -10,8 +10,18 @@ import com.aouyu.apps.weather.adapter.BaseRecyclerAdapter;
 import com.aouyu.apps.weather.adapter.RecyclerViewHolder;
 import com.aouyu.apps.weather.base.BaseSimpleActivity;
 import com.aouyu.apps.weather.bean.CityItemBean;
+import com.aouyu.apps.weather.bean.HeWeatherBean;
+import com.aouyu.apps.weather.bean.WeatherResultBean;
+import com.aouyu.apps.weather.http.ApiUrl;
 import com.aouyu.apps.weather.utils.MessageEvent;
+import com.google.gson.Gson;
 import com.yolanda.nohttp.Logger;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.rest.OnResponseListener;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.RequestQueue;
+import com.yolanda.nohttp.rest.Response;
+import com.yolanda.nohttp.rest.StringRequest;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -30,6 +40,11 @@ public class CitysActivity extends BaseSimpleActivity {
 
     @BindView(R.id.recycler_citys)
     RecyclerView recyclerCitys;
+
+    private WeatherResultBean resultBean;
+    private HeWeatherBean heWeather;
+    private String url;
+    private RequestQueue queue;
 
     @OnClick(R.id.tv_add)
     void add() {
@@ -51,6 +66,8 @@ public class CitysActivity extends BaseSimpleActivity {
 
     @Override
     protected void initData() {
+        url = ApiUrl.API_BASE_URL + "weather";
+        queue = NoHttp.newRequestQueue();
         cityItemBeanList = MyApplication.cityItemBeanList;
         Logger.d("城市列表" + cityItemBeanList);
         initAdapter();
@@ -97,5 +114,49 @@ public class CitysActivity extends BaseSimpleActivity {
                 finish();
             }
         });
+    }
+
+    /**
+     * 获取城市天气
+     *
+     * @param cityname
+     */
+    private void getWeather(String cityname) {
+        Request<String> request = new StringRequest(url);
+        // 添加url?key=value形式的参数
+        request.add("city", cityname);
+        request.add("key", ApiUrl.API_KEY);
+        queue.add(0, request, new OnResponseListener<String>() {
+
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                if (response.responseCode() == 200) {// 请求成功。
+                    Gson gson = new Gson();
+                    resultBean = gson.fromJson(response.get(), WeatherResultBean.class);
+                    heWeather = resultBean.getHeWeather5().get(0);
+                    Logger.d("获取天气结果" + heWeather);
+                    bindData();
+                }
+            }
+
+            @Override
+            public void onFailed(int what, Response<String> response) {
+
+            }
+
+            @Override
+            public void onStart(int what) {
+                // 这里可以show()一个wait dialog。
+            }
+
+            @Override
+            public void onFinish(int what) {
+                // 这里可以dismiss()上面show()的wait dialog。
+            }
+        });
+    }
+
+    private void bindData() {
+
     }
 }

@@ -69,8 +69,61 @@ public class HourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.ViewHolder
      */
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
-//        viewHolder.tvTime.setText(hourlyForecastBeanList.get(i).getDate());
-//        viewHolder.mImg.setImageResource(dailyForecastBeanList.get(i));
+        switch (hourlyForecastBeanList.get(i).getCond().getCode()) {
+            case "100":
+                viewHolder.imgCond.setImageResource(R.drawable.icon_sunny);
+                break;
+            case "101":
+            case "102":
+            case "103":
+                viewHolder.imgCond.setImageResource(R.drawable.icon_cloudy);
+                break;
+            case "104":
+                viewHolder.imgCond.setImageResource(R.drawable.icon_overcast);
+                break;
+            case "302":
+            case "303":
+            case "304":
+                viewHolder.imgCond.setImageResource(R.drawable.icon_thundershower);
+                break;
+            case "305":
+            case "309":
+                viewHolder.imgCond.setImageResource(R.drawable.icon_light_rain);
+                break;
+            case "306":
+            case "307":
+            case "308":
+            case "310":
+            case "311":
+            case "312":
+            case "313":
+                viewHolder.imgCond.setImageResource(R.drawable.icon_heavy_rain);
+                break;
+            case "400":
+            case "401":
+            case "402":
+            case "403":
+            case "404":
+            case "405":
+            case "406":
+            case "407":
+                viewHolder.imgCond.setImageResource(R.drawable.icon_snow);
+                break;
+            case "500":
+            case "501":
+            case "502":
+            case "503":
+            case "504":
+            case "505":
+            case "506":
+            case "507":
+            case "508":
+                viewHolder.imgCond.setImageResource(R.drawable.icon_overcast);
+                break;
+            default:
+                viewHolder.imgCond.setImageResource(R.drawable.icon_sunny);
+                break;
+        }
         if (i == 0) {
             viewHolder.tvTime.setText("现在");
         } else {
@@ -79,7 +132,7 @@ public class HourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.ViewHolder
         if (!hourlyForecastBeanList.get(i).getPop().equals("0")) {
             viewHolder.tvPop.setText(hourlyForecastBeanList.get(i).getPop());
         } else {
-            viewHolder.tvPop.setVisibility(View.GONE);
+            viewHolder.tvPop.setVisibility(View.INVISIBLE);
         }
         viewHolder.tvTmp.setText(hourlyForecastBeanList.get(i).getTmp() + "°");
     }

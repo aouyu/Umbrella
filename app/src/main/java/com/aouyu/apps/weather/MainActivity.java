@@ -12,6 +12,7 @@ import com.aouyu.apps.weather.adapter.DailyAdapter;
 import com.aouyu.apps.weather.adapter.HourlyAdapter;
 import com.aouyu.apps.weather.base.BasePresenterActivity;
 import com.aouyu.apps.weather.bean.CityItemBean;
+import com.aouyu.apps.weather.bean.CondNowBean;
 import com.aouyu.apps.weather.bean.DailyForecastBean;
 import com.aouyu.apps.weather.bean.HeWeatherBean;
 import com.aouyu.apps.weather.bean.HourlyForecastBean;
@@ -92,6 +93,7 @@ public class MainActivity extends BasePresenterActivity<MainPresenter> implement
     private List<HourlyForecastBean> hourlyForecastBeanList = new ArrayList<>();
     private List<DailyForecastBean> dailyForecastBeanList = new ArrayList<>();
     private HourlyForecastBean hourlyBean = new HourlyForecastBean();
+    private CondNowBean condNowBean = new CondNowBean();
     private CityItemBean cityItemBean = new CityItemBean();
     private RequestQueue queue;
     private String url;
@@ -140,7 +142,7 @@ public class MainActivity extends BasePresenterActivity<MainPresenter> implement
                     Gson gson = new Gson();
                     resultBean = gson.fromJson(response.get(), WeatherResultBean.class);
                     heWeather = resultBean.getHeWeather5().get(0);
-                    Logger.d(heWeather);
+                    Logger.d("获取天气结果" + heWeather);
                     bindData();
                 }
             }
@@ -186,6 +188,8 @@ public class MainActivity extends BasePresenterActivity<MainPresenter> implement
         tvAqi.setText(heWeather.getAqi().getCity().getAqi());
         tvQlty.setText(heWeather.getAqi().getCity().getQlty());
 
+        condNowBean.setCode(heWeather.getNow().getCond().getCode());
+        hourlyBean.setCond(condNowBean);
         hourlyBean.setTmp(heWeather.getNow().getTmp());
         hourlyBean.setPop("0");
         hourlyForecastBeanList.add(hourlyBean);
