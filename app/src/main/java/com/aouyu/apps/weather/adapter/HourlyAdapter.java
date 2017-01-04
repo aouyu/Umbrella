@@ -130,7 +130,7 @@ public class HourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.ViewHolder
             viewHolder.tvTime.setText(DateUtil.extractHour(hourlyForecastBeanList.get(i).getDate()) + "时");
         }
         if (!hourlyForecastBeanList.get(i).getPop().equals("0")) {
-            viewHolder.tvPop.setText(hourlyForecastBeanList.get(i).getPop());
+            viewHolder.tvPop.setText(hourlyForecastBeanList.get(i).getPop() + "%");
         } else {
             viewHolder.tvPop.setVisibility(View.INVISIBLE);
         }

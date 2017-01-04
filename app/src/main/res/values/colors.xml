@@ -10,4 +10,6 @@
     <color name="colorSearchBg">#000000</color>
     <color name="colorAddBg">#1D2124</color>
     <color name="colorTransparent">#00000000</color>
+    <color name="colorBlue">#59C4F5</color>
+    <color name="colorOvercast">#20242A</color>
 </resources>

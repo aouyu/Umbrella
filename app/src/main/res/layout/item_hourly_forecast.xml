@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="true"
+    android:background="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -24,7 +26,7 @@
             android:id="@+id/tv_pop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="@color/colorBlue"
             android:textSize="10sp"
             android:layout_marginTop="4dp"/>
 
