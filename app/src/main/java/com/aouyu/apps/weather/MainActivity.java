@@ -8,6 +8,10 @@ import android.util.Log;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.aouyu.apps.weather.adapter.DailyAdapter;
 import com.aouyu.apps.weather.adapter.HourlyAdapter;
 import com.aouyu.apps.weather.base.BasePresenterActivity;
@@ -97,6 +101,10 @@ public class MainActivity extends BasePresenterActivity<MainPresenter> implement
     private CityItemBean cityItemBean = new CityItemBean();
     private RequestQueue queue;
     private String url;
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+    //声明AMapLocationClientOption对象
+    public AMapLocationClientOption mLocationOption = null;
 
     @OnClick(R.id.img_city_list)
     void cityList() {
@@ -116,17 +124,53 @@ public class MainActivity extends BasePresenterActivity<MainPresenter> implement
 
     @Override
     protected void initData() {
+        //初始化AMapLocationClientOption对象
+        mLocationOption = new AMapLocationClientOption();
+        //设置定位模式为AMapLocationMode.Battery_Saving，低功耗模式。
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);
+        //获取一次定位结果：
+        mLocationOption.setOnceLocation(true);
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());
+        //设置定位回调监听
+        mLocationClient.setLocationListener(mLocationListener);
+        //给定位客户端对象设置定位参数
+        mLocationClient.setLocationOption(mLocationOption);
+        //启动定位
+        mLocationClient.startLocation();
+
         //注册EventBus
         EventBus.getDefault().register(this);
         url = ApiUrl.API_BASE_URL + "weather";
         queue = NoHttp.newRequestQueue();
-        getWeather("上海");
     }
 
     /**
+     * 定位监听
+     */
+    AMapLocationListener mLocationListener = new AMapLocationListener() {
+        @Override
+        public void onLocationChanged(AMapLocation amapLocation) {
+            if (null != amapLocation) {
+                if (amapLocation.getErrorCode() == 0) {
+                    //解析定位结果
+                    Logger.d("定位结果：" + amapLocation);
+                    mLocationClient.stopLocation();//停止定位后，本地定位服务并不会被销毁
+                    mLocationClient.onDestroy();//销毁定位客户端，同时销毁本地定位服务。
+                    getWeather(amapLocation.getCity().replace("市", ""));
+                }
+            } else {
+                show("定位失败，loc is null");
+            }
+        }
+    };
+
+    /**
      * 获取城市天气
+     *
      * @param cityname
      */
+
     private void getWeather(String cityname) {
         hourlyForecastBeanList.clear();
         dailyForecastBeanList.clear();
@@ -197,7 +241,7 @@ public class MainActivity extends BasePresenterActivity<MainPresenter> implement
             hourlyForecastBeanList.add(heWeather.getHourly_forecast().get(i));
         }
         Logger.d(heWeather.getHourly_forecast().size());
-        Logger.d(hourlyForecastBeanList);
+        Logger.d("小时预报列表：" + hourlyForecastBeanList);
         for (int i = 0; i < heWeather.getDaily_forecast().size(); i++) {
             if (i != 0) {
                 dailyForecastBeanList.add(heWeather.getDaily_forecast().get(i));

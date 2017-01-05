@@ -99,6 +99,8 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder> 
             case "304":
                 viewHolder.imgCond.setImageResource(R.drawable.icon_thundershower);
                 break;
+            case "300":
+            case "301":
             case "305":
             case "309":
                 viewHolder.imgCond.setImageResource(R.drawable.icon_light_rain);

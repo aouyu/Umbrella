@@ -86,6 +86,8 @@ public class HourlyAdapter extends RecyclerView.Adapter<HourlyAdapter.ViewHolder
             case "304":
                 viewHolder.imgCond.setImageResource(R.drawable.icon_thundershower);
                 break;
+            case "300":
+            case "301":
             case "305":
             case "309":
                 viewHolder.imgCond.setImageResource(R.drawable.icon_light_rain);
