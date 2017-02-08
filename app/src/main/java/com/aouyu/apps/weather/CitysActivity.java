@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.aouyu.apps.weather.adapter.BaseRecyclerAdapter;
 import com.aouyu.apps.weather.adapter.RecyclerViewHolder;
 import com.aouyu.apps.weather.base.BaseSimpleActivity;
@@ -40,6 +41,8 @@ public class CitysActivity extends BaseSimpleActivity {
 
     @BindView(R.id.recycler_citys)
     RecyclerView recyclerCitys;
+    @BindView(R.id.animation_view)
+    LottieAnimationView animationView;
 
     private WeatherResultBean resultBean;
     private HeWeatherBean heWeather;
@@ -53,7 +56,11 @@ public class CitysActivity extends BaseSimpleActivity {
 
     @OnClick(R.id.img_info)
     void info() {
-
+        if (animationView.isAnimating()) {
+            animationView.cancelAnimation();
+        } else {
+            animationView.playAnimation();
+        }
     }
 
     private BaseRecyclerAdapter<CityItemBean> mBaseAdapter;
@@ -68,7 +75,7 @@ public class CitysActivity extends BaseSimpleActivity {
     protected void initData() {
         url = ApiUrl.API_BASE_URL + "weather";
         queue = NoHttp.newRequestQueue();
-        cityItemBeanList = MyApplication.cityItemBeanList;
+        cityItemBeanList = cityItemBeanList;
         Logger.d("城市列表" + cityItemBeanList);
         initAdapter();
 

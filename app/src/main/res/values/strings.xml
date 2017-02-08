@@ -37,4 +37,6 @@
     <string name="aqi_num">24</string>
     <string name="qlty">空气质量：</string>
     <string name="qlty_num">良好</string>
+
+    <string name="add_city">添加城市</string>
 </resources>

@@ -10,9 +10,14 @@
     tools:context="com.aouyu.apps.weather.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
+        android:layout_above="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_above="@+id/ll_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
@@ -151,6 +156,9 @@
                 layout="@layout/content_today"/>
         </LinearLayout>
     </ScrollView>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:id="@+id/ll_bottom"

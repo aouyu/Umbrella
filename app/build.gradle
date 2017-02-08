@@ -5,7 +5,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "23.0.2"
     defaultConfig {
-        applicationId "com.aouyu.apps.umbrella"
+        applicationId "com.aouyu.apps.weather"
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
@@ -42,4 +42,5 @@ dependencies {
     compile 'com.yolanda.nohttp:nohttp:1.1.0'
     compile 'com.yanzhenjie.nohttp:okhttp:1.1.0'
     compile files('libs/AMap_Location_V3.2.1_20161228.jar')
+    compile 'com.airbnb.android:lottie:1.0.1'
 }

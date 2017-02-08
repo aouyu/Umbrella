@@ -36,6 +36,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
 
         <activity
@@ -53,6 +57,15 @@
         <!-- 高德定位 -->
         <meta-data android:name="com.amap.api.v2.apikey" android:value="4c9358ad2a9df2400a568c3a6aeb1d97"/>
         <service android:name="com.amap.api.location.APSService"/>
+
+        <!-- 桌面小插件 -->
+        <receiver android:name=".widget.MyWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_provider"/>
+        </receiver>
 
 
     </application>

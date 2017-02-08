@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/icon_cloudy"
+        android:shortcutId="search_bookmarks"
+        android:shortcutShortLabel="@string/add_city"
+        android:shortcutLongLabel="@string/add_city">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.aouyu.apps.weather"
+            android:targetClass="com.aouyu.apps.weather.AddActivity" />
+
+        <!--如果你的一个shortcut关联着多个intent，你可以在这里继续添
+            加。最后一个intent决定着用户在加载这个shortcut时会看到什么-->
+
+        <categories android:name="android.shortcut.conversation" />
+
+    </shortcut>
+
+    <!--在这里添加更多的shortcut-->
+
+</shortcuts>

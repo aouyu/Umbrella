@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -43,5 +44,29 @@
         android:layout_height="wrap_content"
         android:src="@drawable/icon_info"
         android:layout_gravity="center_horizontal"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_fileName="EmptyState.json"
+        app:lottie_loop="false"
+        app:lottie_autoPlay="false" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_fileName="TwitterHeart.json"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_fileName="PinJump.json"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true" />
 
 </LinearLayout>

@@ -114,7 +114,8 @@ public class MainActivity extends BasePresenterActivity<MainPresenter> implement
 
     @OnClick(R.id.img_info)
     void info() {
-        show("开发中");
+        //TODO info按钮
+//        show("开发中");
     }
 
     @Override
